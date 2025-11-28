@@ -1,3 +1,4 @@
+
 # nhanes_survey_analysis.R
 # NHANES 2019–2020 Survey Analysis: Physical Activity and BP Control
 # Outputs CSV files with descriptive stats and regression results
@@ -10,7 +11,7 @@ library(foreign)
 library(broom)
 library(readr)
 
-#2 Load NHANES datasets (place XPT files in data/ folder)
+#2 Load NHANES datasets
 demo <- read.xport("data/P_DEMO.xpt")
 bpx  <- read.xport("data/P_BPXO.xpt")
 paq  <- read.xport("data/P_PAQ.xpt")
@@ -106,3 +107,4 @@ write.csv(weighted_table_df, "outputs/PA_vs_BP_Crosstab.csv", row.names = FALSE)
 write.csv(as.data.frame(pr_estimates), "outputs/BP_Control_MainModel_PR.csv", row.names = TRUE)
 write.csv(as.data.frame(pr_inter_estimates), "outputs/BP_Control_InteractionModel_PR.csv", row.names = TRUE)
 C:/Users/ryzen7/Documents/ADA-final-project/outputs/
+  

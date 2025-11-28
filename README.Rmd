@@ -1,7 +1,8 @@
+<<<<<<< HEAD
 ---
 title: "NHANES Survey Analysis"
 author: "Yohannes Wondmeneh"
-date: "`r Sys.Date(11/28/2025)`"
+date: " 11/28/2025`"
 output: html_document
 ---
 # ADA Final Project: NHANES Survey Analysis
@@ -25,3 +26,5 @@ Analyzing association between physical activity (PA) and blood pressure (BP) con
 - `PA_vs_BP_Crosstab.csv` : Weighted counts of PA adherence vs BP control
 - `BP_Control_MainModel_PR.csv` : Prevalence ratios (PRs) for main model
 - `BP_Control_InteractionModel_PR.csv` : PRs for interaction model
+=======
+
