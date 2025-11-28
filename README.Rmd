@@ -1,0 +1,27 @@
+---
+title: "NHANES Survey Analysis"
+author: "Yohannes Wondmeneh"
+date: "`r Sys.Date()`"
+output: html_document
+---
+# ADA Final Project: NHANES Survey Analysis
+
+## Overview
+Analyzing association between physical activity (PA) and blood pressure (BP) control using NHANES 2019–2020 survey data.
+
+## Folder Structure
+- `data/` : Raw NHANES .xpt files
+- `code/` : R scripts for data cleaning, survey analysis, regression models
+- `outputs/` : CSV files of descriptive stats, crosstabs, and regression results
+- `README.md` : This file
+
+## How to Run
+1. Place NHANES .xpt files in `data/`.
+2. Run `nhanes_survey_analysis.R` in RStudio.
+3. Outputs will be saved automatically in the `outputs/` folder.
+
+## CSV Files
+- `Weighted_Means.csv` : Weighted mean (SE) of SBP, DBP, Age, BMI
+- `PA_vs_BP_Crosstab.csv` : Weighted counts of PA adherence vs BP control
+- `BP_Control_MainModel_PR.csv` : Prevalence ratios (PRs) for main model
+- `BP_Control_InteractionModel_PR.csv` : PRs for interaction model
