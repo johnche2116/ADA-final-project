@@ -1,30 +1,266 @@
-<<<<<<< HEAD
----
-title: "NHANES Survey Analysis"
+title: "NHANES Survey Analysis: Physical Activity & Blood Pressure Control"
 author: "Yohannes Wondmeneh"
-date: " 11/28/2025`"
+date: "2025-12-02"
 output: html_document
 ---
-# ADA Final Project: NHANES Survey Analysis
+##Overview
 
-## Overview
-Analyzing association between physical activity (PA) and blood pressure (BP) control using NHANES 2019–2020 survey data.
+This project investigates the association between meeting physical activity (PA) guidelines and blood pressure (BP) control among U.S. adults using the NHANES 2019–2020 survey cycle.
 
-## Folder Structure
-- `data/` : Raw NHANES .xpt files
-- `code/` : R scripts for data cleaning, survey analysis, regression models
-- `outputs/` : CSV files of descriptive stats, crosstabs, and regression results
-- `README.md` : This file
+Using the NHANES complex sampling design, we estimate survey-weighted prevalence ratios (PRs) to evaluate:
 
-## How to Run
-1. Place NHANES .xpt files in `data/`.
-2. Run `nhanes_survey_analysis.R` in RStudio.
-3. Outputs will be saved automatically in the `outputs/` folder.
+  1. Whether meeting PA guidelines is associated with controlled BP (<130/80 mmHg).
 
-## CSV Files
-- `Weighted_Means.csv` : Weighted mean (SE) of SBP, DBP, Age, BMI
-- `PA_vs_BP_Crosstab.csv` : Weighted counts of PA adherence vs BP control
-- `BP_Control_MainModel_PR.csv` : Prevalence ratios (PRs) for main model
-- `BP_Control_InteractionModel_PR.csv` : PRs for interaction model
-=======
+  2. Whether the association remains significant after adjusting for confounders.
+
+  3. Whether the association varies by sex, BMI, or other demographic factors (interaction model).
+
+All results and exported outputs are included in the outputs/ folder
+
+##Folder Structure
+project/
+│
+├── data/
+│   └── NHANES .xpt files (DEMO, BPX, PAQ, BMX, SMQ, ALQ, DIQ)
+│
+├── code/
+│   └── nhanes_survey_analysis.R        # Main survey analysis script
+│
+├── outputs/
+│   ├── Weighted_Means.csv             
+│   ├── PA_vs_BP_Crosstab.csv          
+│   ├── BP_Control_MainModel_PR.csv    
+│   └── BP_Control_InteractionModel_PR.csv 
+│
+└── README.md                          
+
+##Data Source
+
+Data come from the National Health and Nutrition Examination Survey (NHANES), a nationally representative survey conducted by the CDC.
+
+NHANES datasets used:
+
+DEMO — Demographics
+
+BPX — Blood pressure readings
+
+PAQ — Physical activity
+
+BMX — Body measures (BMI)
+
+SMQ — Smoking
+
+ALQ — Alcohol use
+
+DIQ — Diabetes questionnaire
+
+Cycle used: 2019–2020
+
+
+##Study Population
+Inclusion Criteria
+  Adults age ≥18 years
+
+  Complete BP and PA data
+ 
+Exclusion Criteria
+
+  Pregnant participants
+
+  Missing covariates
+
+  Implausible values (BP, PA, BMI)
+
+#Variables
+Outcome: BP Control
+
+Defined using mean SBP/DBP: <130 / 80 mmHg = controlled
+
+Exposure: Meeting PA Guidelines
+
+   Yes/No based on PAQ:
+
+   ≥150 minutes/week moderate, OR
+
+   ≥75 minutes/week vigorous activity
+
+Covariates
+
+  Age (continuous)
+
+  Sex
+
+  Race/ethnicity
+
+  BMI (continuous)
+
+  Smoking status
+
+  Alcohol use
+
+  Diabetes status
+
+
+##Statistical Methods
+
+All analyses conducted in R using survey-weighted methods.
+
+Descriptive statistics: weighted means and proportions
+
+Regression: Poisson models with robust SEs to estimate prevalence ratios
+
+Models:
+
+Main adjusted model
+
+Interaction model (PA × sex, PA × BMI)
+
+Diagnostics performed:
+
+Multicollinearity (VIF)
+
+Influence/fit checks
+
+Confirmation of correct survey specification
+
+##Output Files Explained
+Weighted_Means.csv
+
+Weighted mean (SE) for SBP, DBP, Age, BMI.
+
+PA_vs_BP_Crosstab.csv
+
+Weighted proportions of BP control by:
+
+Meeting PA guidelines
+
+Not meeting PA guidelines
+
+BP_Control_MainModel_PR.csv
+
+Survey-weighted adjusted prevalence ratios for:
+
+PA
+
+Age, sex, race/ethnicity
+
+BMI
+
+Smoking
+
+Alcohol use
+
+Diabetes
+
+BP_Control_InteractionModel_PR.csv
+
+Interaction-adjusted PRs including:
+
+PA × Sex
+
+PA × BMI
+
+Revised PA main effect under interaction model
+
+##Findings
+Main Model (Adjusted PRs)
+
+In the fully adjusted model:
+
+Meeting PA guidelines was not significantly associated with BP control
+
+PR = 0.953
+
+95% CI 0.904–1.005
+
+CI includes 1 → not significant
+
+Although the estimate suggests a slight protective effect (PR < 1), this was not statistically significant.
+
+Significant predictors of lower BP control:
+
+Older age (PR = 0.988; CI 0.986–0.990)
+
+Higher BMI (PR = 0.987; CI 0.982–0.992)
+
+Non-Hispanic Black race (PR = 0.801; CI 0.750–0.854)
+
+Other race category (PR = 0.912; CI 0.848–0.981)
+
+Alcohol use (PR = 0.881; CI 0.811–0.958)
+
+Significant predictors of higher BP control:
+
+Current smoking (PR = 1.083; CI 1.025–1.145)
+(Note: Counterintuitive finding; could be due to medication adherence or residual confounding.)
+
+Non-significant predictors:
+
+Diabetes status
+
+PA in the main model
+
+
+##Interaction Model
+
+Two interaction terms were evaluated: PA × Sex and PA × BMI.
+
+PA × Sex
+
+PR = 0.979
+
+95% CI 0.910–1.053
+
+Not significant
+The effect of PA on BP control does not differ by sex.
+
+PA × BMI
+
+PR = 0.991
+
+95% CI 0.985–0.998
+
+Significant
+The effect of PA varies slightly by BMI, though the effect size is very small.
+
+PA main effect (in interaction model)
+
+PR = 1.247
+
+95% CI 1.036–1.501
+
+Significant
+
+After accounting for interactions (mainly BMI), meeting PA guidelines is associated with better BP control.
+
+
+##Interpretation Summary
+
+In the main adjusted model, PA was not significantly associated with BP control.
+
+In the interaction model, PA became significant, indicating that its effect depends partly on BMI.
+
+BMI, age, race, and alcohol use were important determinants of BP control.
+
+Results highlight the complexity of BP control and suggest that the benefit of PA may not be uniform across population subgroups.
+
+##How to Run the Analysis
+
+Download NHANES .xpt files and place in data/.
+
+Open RStudio.
+
+Run:
+Outputs will appear automatically in the outputs/ folder.
+
+##References
+
+Whelton PK et al. 2017 ACC/AHA BP Guidelines. JACC.
+
+Piercy KL et al. Physical Activity Guidelines for Americans, 2nd Edition.
+
+CDC NHANES Documentation: https://wwwn.cdc.gov/nchs/nhanes
+
+Diaz KM et al. Hypertension, 2019.
+
 
